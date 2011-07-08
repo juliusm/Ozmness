@@ -1,6 +1,6 @@
 package com.orangeandbronze.ozmness
 
-class Employee extends User {
+class Employee {
 
 	Employee mentor
 	static hasMany = [mentees: Employee]

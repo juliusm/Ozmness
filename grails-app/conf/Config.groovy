@@ -9,7 +9,7 @@
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
-
+import grails.plugins.springsecurity.SecurityConfigType
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -93,3 +93,16 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.orangeandbronze.ozmness.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.orangeandbronze.ozmness.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.orangeandbronze.ozmness.Role'
+
+grails.plugins.springsecurity.rejectIfNoRule = false
+grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
+grails.plugins.springsecurity.interceptUrlMap = [
+	'/': 		['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/image/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/js/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/css/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/images/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/login/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/logout/':	['IS_AUTHENTICATED_ANONYMOUSLY']
+
+]
