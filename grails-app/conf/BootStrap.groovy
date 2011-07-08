@@ -1,21 +1,18 @@
 import com.orangeandbronze.ozmness.*
 
 class BootStrap {
-	def springSecurityService
-	def init = { servletContext ->
-		def roles = [:]
-		def users = [:]
-		roles.admin = Role.findByAuthority("ROLE_ADMIN") ?: \
-new Role(authority: "ROLE_ADMIN").save()
-		users.admin = User.findByUsername('admin') ?: \
-new User(username: 'admin',
-				password: springSecurityService.encodePassword('rawr'), \
-enabled: true, \
-accountExpired:false, \
-accountLocked: false, \
-passwordExpired: false).save()
-		UserRole.create( users.admin, roles.admin )
-	}
-	def destroy = {
-	}
+
+   def springSecurityService
+
+   def init = { servletContext ->
+
+      def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+      def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+
+      String password = springSecurityService.encodePassword('password')
+      def testUser = new User(username: 'me', enabled: true, password: password)
+      testUser.save(flush: true)
+
+      UserRole.create testUser, adminRole, true
+   }
 }

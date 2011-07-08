@@ -1,6 +1,6 @@
 package com.orangeandbronze.ozmness
 
-class EmployeeControlerController {
+class EmployeeController {
 
     def scaffold = true
 }

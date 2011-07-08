@@ -3,8 +3,8 @@ package com.orangeandbronze.ozmness
 class Project {
 	
 	Employee lead
-	static hasManyTechnologies = [technologies: Technology]
-	static hasManyMembers = [members: Employee]
+	String name
+	static hasMany = [technologies: Technology, members:Employee]
 	
     static constraints = {
     }
