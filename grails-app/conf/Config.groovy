@@ -95,13 +95,13 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.orangeand
 grails.plugins.springsecurity.authority.className = 'com.orangeandbronze.ozmness.Role'
 
 grails.plugins.springsecurity.rejectIfNoRule = false
-grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
-grails.plugins.springsecurity.interceptUrlMap = [
-	'/': 		['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/image/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/js/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/css/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/images/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+	'/**': 		['IS_AUTHENTICATED_FULLY'],
+	'/image/**':	['IS_AUTHENTICATED_FULLY'],
+	'/js/**':	['IS_AUTHENTICATED_FULLY'],
+	'/css/**':	['IS_AUTHENTICATED_FULLY'],
+	'/images/**':	['IS_AUTHENTICATED_FULLY'],
 	'/login/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/logout/':	['IS_AUTHENTICATED_ANONYMOUSLY']
 

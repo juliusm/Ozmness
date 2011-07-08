@@ -7,4 +7,8 @@ class Position {
 	
     static constraints = {
     }
+	
+	String toString(){
+		name
+	}
 }

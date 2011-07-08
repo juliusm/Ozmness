@@ -6,5 +6,10 @@ class Technology {
 	Technology parent
 	
     static constraints = {
-    }
+    	parent(nullable:true)
+		}
+	
+	String toString(){
+		name
+	}
 }

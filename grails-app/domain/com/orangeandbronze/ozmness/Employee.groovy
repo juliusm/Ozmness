@@ -4,8 +4,12 @@ class Employee extends User{
 
 	Employee mentor
 	Position position
-	static hasMany = [mentees: Employee]
+	static hasMany = [projects: Project]
 	
     static constraints = {
     }
+	
+	String toString(){
+		username
+	}
 }

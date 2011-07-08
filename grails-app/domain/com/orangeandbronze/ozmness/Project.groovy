@@ -4,8 +4,12 @@ class Project {
 	
 	Employee lead
 	String name
-	static hasMany = [technologies: Technology, members:Employee]
+	static hasMany = [technologies: Technology]
 	
     static constraints = {
     }
+	
+	String toString(){
+		name
+	}
 }
