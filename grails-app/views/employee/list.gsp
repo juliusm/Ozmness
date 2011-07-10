@@ -26,7 +26,13 @@
                         
                             <g:sortableColumn property="username" title="${message(code: 'employee.username.label', default: 'Username')}" />
                         
-                            <g:sortableColumn property="position" title="${message(code: 'employee.position.label', default: 'Position')}" />
+                            <g:sortableColumn property="password" title="${message(code: 'employee.password.label', default: 'Password')}" />
+                        
+                            <g:sortableColumn property="accountExpired" title="${message(code: 'employee.accountExpired.label', default: 'Account Expired')}" />
+                        
+                            <g:sortableColumn property="accountLocked" title="${message(code: 'employee.accountLocked.label', default: 'Account Locked')}" />
+                        
+                            <g:sortableColumn property="enabled" title="${message(code: 'employee.enabled.label', default: 'Enabled')}" />
                         
                         </tr>
                     </thead>
@@ -38,7 +44,13 @@
                         
                             <td>${fieldValue(bean: employeeInstance, field: "username")}</td>
                         
-                            <td>${fieldValue(bean: employeeInstance, field: "position.name")}</td>
+                            <td>${fieldValue(bean: employeeInstance, field: "password")}</td>
+                        
+                            <td><g:formatBoolean boolean="${employeeInstance.accountExpired}" /></td>
+                        
+                            <td><g:formatBoolean boolean="${employeeInstance.accountLocked}" /></td>
+                        
+                            <td><g:formatBoolean boolean="${employeeInstance.enabled}" /></td>
                         
                         </tr>
                     </g:each>

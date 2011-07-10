@@ -1,7 +1,5 @@
 package com.orangeandbronze.ozmness
 
-import grails.plugins.springsecurity.Secured;
-
 class TechnologyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,14 +13,12 @@ class TechnologyController {
         [technologyInstanceList: Technology.list(params), technologyInstanceTotal: Technology.count()]
     }
 
-	@Secured(['ROLE_ADMIN'])
     def create = {
         def technologyInstance = new Technology()
         technologyInstance.properties = params
         return [technologyInstance: technologyInstance]
     }
 
-	@Secured(['ROLE_ADMIN'])
     def save = {
         def technologyInstance = new Technology(params)
         if (technologyInstance.save(flush: true)) {
@@ -45,7 +41,6 @@ class TechnologyController {
         }
     }
 
-	@Secured(['ROLE_ADMIN'])
     def edit = {
         def technologyInstance = Technology.get(params.id)
         if (!technologyInstance) {
@@ -57,7 +52,6 @@ class TechnologyController {
         }
     }
 
-	@Secured(['ROLE_ADMIN'])
     def update = {
         def technologyInstance = Technology.get(params.id)
         if (technologyInstance) {
@@ -85,7 +79,6 @@ class TechnologyController {
         }
     }
 
-	@Secured(['ROLE_ADMIN'])
     def delete = {
         def technologyInstance = Technology.get(params.id)
         if (technologyInstance) {

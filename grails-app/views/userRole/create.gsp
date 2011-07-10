@@ -1,11 +1,11 @@
 
 
-<%@ page import="com.orangeandbronze.ozmness.Project" %>
+<%@ page import="com.orangeandbronze.ozmness.UserRole" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
+        <g:set var="entityName" value="${message(code: 'userRole.label', default: 'UserRole')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -18,9 +18,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${projectInstance}">
+            <g:hasErrors bean="${userRoleInstance}">
             <div class="errors">
-                <g:renderErrors bean="${projectInstance}" as="list" />
+                <g:renderErrors bean="${userRoleInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form action="save" >
@@ -30,10 +30,19 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name"><g:message code="project.name.label" default="Name" /></label>
+                                    <label for="role"><g:message code="userRole.role.label" default="Role" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${projectInstance?.name}" />
+                                <td valign="top" class="value ${hasErrors(bean: userRoleInstance, field: 'role', 'errors')}">
+                                    <g:select name="role.id" from="${com.orangeandbronze.ozmness.Role.list()}" optionKey="id" value="${userRoleInstance?.role?.id}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="user"><g:message code="userRole.user.label" default="User" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userRoleInstance, field: 'user', 'errors')}">
+                                    <g:select name="user.id" from="${com.orangeandbronze.ozmness.User.list()}" optionKey="id" value="${userRoleInstance?.user?.id}"  />
                                 </td>
                             </tr>
                         

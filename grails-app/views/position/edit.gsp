@@ -33,19 +33,19 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="name"><g:message code="position.name.label" default="Name" /></label>
+                                  <label for="minimumRatings"><g:message code="position.minimumRatings.label" default="Minimum Ratings" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${positionInstance?.name}" />
+                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'minimumRatings', 'errors')}">
+                                    <g:select name="minimumRatings" from="${com.orangeandbronze.ozmness.Rating.list()}" multiple="yes" optionKey="id" size="5" value="${positionInstance?.minimumRatings*.id}" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="ratings"><g:message code="position.ratings.label" default="Ratings" /></label>
+                                  <label for="name"><g:message code="position.name.label" default="Name" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'ratings', 'errors')}">
-                                    <g:select name="ratings" from="${com.orangeandbronze.ozmness.Rating.list()}" multiple="yes" optionKey="id" size="5" value="${positionInstance?.ratings*.id}" />
+                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'name', 'errors')}">
+                                    <g:textField name="name" value="${positionInstance?.name}" />
                                 </td>
                             </tr>
                         

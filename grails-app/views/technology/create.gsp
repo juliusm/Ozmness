@@ -30,19 +30,19 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name"><g:message code="technology.name.label" default="Name" /></label>
+                                    <label for="parent"><g:message code="technology.parent.label" default="Parent" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${technologyInstance?.name}" />
+                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'parent', 'errors')}">
+                                    <g:select name="parent.id" from="${com.orangeandbronze.ozmness.Technology.list()}" optionKey="id" value="${technologyInstance?.parent?.id}" noSelection="['null': '']" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="parent"><g:message code="technology.parent.label" default="Parent" /></label>
+                                    <label for="name"><g:message code="technology.name.label" default="Name" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'parent', 'errors')}">
-                                    <g:select name="parent.id" noSelection="${['null':'Select One...']}" from="${com.orangeandbronze.ozmness.Technology.list()}" optionKey="id" value="${technologyInstance?.parent?.id}"  />
+                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'name', 'errors')}">
+                                    <g:textField name="name" value="${technologyInstance?.name}" />
                                 </td>
                             </tr>
                         

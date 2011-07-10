@@ -1,11 +1,11 @@
 
 
-<%@ page import="com.orangeandbronze.ozmness.Project" %>
+<%@ page import="com.orangeandbronze.ozmness.Role" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
+        <g:set var="entityName" value="${message(code: 'role.label', default: 'Role')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -18,9 +18,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${projectInstance}">
+            <g:hasErrors bean="${roleInstance}">
             <div class="errors">
-                <g:renderErrors bean="${projectInstance}" as="list" />
+                <g:renderErrors bean="${roleInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form action="save" >
@@ -30,10 +30,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name"><g:message code="project.name.label" default="Name" /></label>
+                                    <label for="authority"><g:message code="role.authority.label" default="Authority" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${projectInstance?.name}" />
+                                <td valign="top" class="value ${hasErrors(bean: roleInstance, field: 'authority', 'errors')}">
+                                    <g:textField name="authority" value="${roleInstance?.authority}" />
                                 </td>
                             </tr>
                         

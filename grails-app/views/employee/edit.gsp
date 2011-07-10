@@ -45,7 +45,7 @@
                                   <label for="password"><g:message code="employee.password.label" default="Password" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'password', 'errors')}">
-                                    <g:textField name="password" />
+                                    <g:textField name="password" value="${employeeInstance?.password}" />
                                 </td>
                             </tr>
                         
@@ -99,7 +99,39 @@
                                   <label for="position"><g:message code="employee.position.label" default="Position" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'position', 'errors')}">
-                                    <g:select name="position.id" from="${com.orangeandbronze.ozmness.Position.list()}" optionKey="id" value="${employeeInstance?.position?.name}"  />
+                                    <g:select name="position.id" from="${com.orangeandbronze.ozmness.Position.list()}" optionKey="id" value="${employeeInstance?.position?.id}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="projects"><g:message code="employee.projects.label" default="Projects" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'projects', 'errors')}">
+                                    
+<ul>
+<g:each in="${employeeInstance?.projects?}" var="p">
+    <li><g:link controller="project_Employee" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+</g:each>
+</ul>
+<g:link controller="project_Employee" action="create" params="['employee.id': employeeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'project_Employee.label', default: 'Project_Employee')])}</g:link>
+
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="proteges"><g:message code="employee.proteges.label" default="Proteges" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'proteges', 'errors')}">
+                                    
+<ul>
+<g:each in="${employeeInstance?.proteges?}" var="p">
+    <li><g:link controller="employee" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+</g:each>
+</ul>
+<g:link controller="employee" action="create" params="['employee.id': employeeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'employee.label', default: 'Employee')])}</g:link>
+
                                 </td>
                             </tr>
                         

@@ -1,11 +1,11 @@
 
 
-<%@ page import="com.orangeandbronze.ozmness.Technology" %>
+<%@ page import="com.orangeandbronze.ozmness.UserRole" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'technology.label', default: 'Technology')}" />
+        <g:set var="entityName" value="${message(code: 'userRole.label', default: 'UserRole')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -19,33 +19,33 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${technologyInstance}">
+            <g:hasErrors bean="${userRoleInstance}">
             <div class="errors">
-                <g:renderErrors bean="${technologyInstance}" as="list" />
+                <g:renderErrors bean="${userRoleInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form method="post" >
-                <g:hiddenField name="id" value="${technologyInstance?.id}" />
-                <g:hiddenField name="version" value="${technologyInstance?.version}" />
+                <g:hiddenField name="id" value="${userRoleInstance?.id}" />
+                <g:hiddenField name="version" value="${userRoleInstance?.version}" />
                 <div class="dialog">
                     <table>
                         <tbody>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="parent"><g:message code="technology.parent.label" default="Parent" /></label>
+                                  <label for="role"><g:message code="userRole.role.label" default="Role" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'parent', 'errors')}">
-                                    <g:select name="parent.id" from="${com.orangeandbronze.ozmness.Technology.list()}" optionKey="id" value="${technologyInstance?.parent?.id}" noSelection="['null': '']" />
+                                <td valign="top" class="value ${hasErrors(bean: userRoleInstance, field: 'role', 'errors')}">
+                                    <g:select name="role.id" from="${com.orangeandbronze.ozmness.Role.list()}" optionKey="id" value="${userRoleInstance?.role?.id}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="name"><g:message code="technology.name.label" default="Name" /></label>
+                                  <label for="user"><g:message code="userRole.user.label" default="User" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${technologyInstance?.name}" />
+                                <td valign="top" class="value ${hasErrors(bean: userRoleInstance, field: 'user', 'errors')}">
+                                    <g:select name="user.id" from="${com.orangeandbronze.ozmness.User.list()}" optionKey="id" value="${userRoleInstance?.user?.id}"  />
                                 </td>
                             </tr>
                         

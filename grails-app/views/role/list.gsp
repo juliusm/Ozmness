@@ -1,10 +1,10 @@
 
-<%@ page import="com.orangeandbronze.ozmness.Project" %>
+<%@ page import="com.orangeandbronze.ozmness.Role" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
+        <g:set var="entityName" value="${message(code: 'role.label', default: 'Role')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -22,19 +22,19 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'project.id.label', default: 'Id')}" />
+                            <g:sortableColumn property="id" title="${message(code: 'role.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="name" title="${message(code: 'project.name.label', default: 'Name')}" />
+                            <g:sortableColumn property="authority" title="${message(code: 'role.authority.label', default: 'Authority')}" />
                         
                         </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${projectInstanceList}" status="i" var="projectInstance">
+                    <g:each in="${roleInstanceList}" status="i" var="roleInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${projectInstance.id}">${fieldValue(bean: projectInstance, field: "id")}</g:link></td>
+                            <td><g:link action="show" id="${roleInstance.id}">${fieldValue(bean: roleInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: projectInstance, field: "name")}</td>
+                            <td>${fieldValue(bean: roleInstance, field: "authority")}</td>
                         
                         </tr>
                     </g:each>
@@ -42,7 +42,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${projectInstanceTotal}" />
+                <g:paginate total="${roleInstanceTotal}" />
             </div>
         </div>
     </body>

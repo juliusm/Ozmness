@@ -1,7 +1,5 @@
 package com.orangeandbronze.ozmness
 
-import grails.plugins.springsecurity.Secured;
-
 class ProjectController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,14 +13,12 @@ class ProjectController {
         [projectInstanceList: Project.list(params), projectInstanceTotal: Project.count()]
     }
 
-	@Secured(['ROLE_ADMIN'])
     def create = {
         def projectInstance = new Project()
         projectInstance.properties = params
         return [projectInstance: projectInstance]
     }
 
-	@Secured(['ROLE_ADMIN'])
     def save = {
         def projectInstance = new Project(params)
         if (projectInstance.save(flush: true)) {
@@ -45,7 +41,6 @@ class ProjectController {
         }
     }
 
-	@Secured(['ROLE_ADMIN'])
     def edit = {
         def projectInstance = Project.get(params.id)
         if (!projectInstance) {
@@ -57,7 +52,6 @@ class ProjectController {
         }
     }
 
-	@Secured(['ROLE_ADMIN'])
     def update = {
         def projectInstance = Project.get(params.id)
         if (projectInstance) {
@@ -85,7 +79,6 @@ class ProjectController {
         }
     }
 
-	@Secured(['ROLE_ADMIN'])
     def delete = {
         def projectInstance = Project.get(params.id)
         if (projectInstance) {

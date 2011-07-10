@@ -1,11 +1,11 @@
 
 
-<%@ page import="com.orangeandbronze.ozmness.Technology" %>
+<%@ page import="com.orangeandbronze.ozmness.Project_Employee" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'technology.label', default: 'Technology')}" />
+        <g:set var="entityName" value="${message(code: 'project_Employee.label', default: 'Project_Employee')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -19,33 +19,42 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${technologyInstance}">
+            <g:hasErrors bean="${project_EmployeeInstance}">
             <div class="errors">
-                <g:renderErrors bean="${technologyInstance}" as="list" />
+                <g:renderErrors bean="${project_EmployeeInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form method="post" >
-                <g:hiddenField name="id" value="${technologyInstance?.id}" />
-                <g:hiddenField name="version" value="${technologyInstance?.version}" />
+                <g:hiddenField name="id" value="${project_EmployeeInstance?.id}" />
+                <g:hiddenField name="version" value="${project_EmployeeInstance?.version}" />
                 <div class="dialog">
                     <table>
                         <tbody>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="parent"><g:message code="technology.parent.label" default="Parent" /></label>
+                                  <label for="employee"><g:message code="project_Employee.employee.label" default="Employee" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'parent', 'errors')}">
-                                    <g:select name="parent.id" from="${com.orangeandbronze.ozmness.Technology.list()}" optionKey="id" value="${technologyInstance?.parent?.id}" noSelection="['null': '']" />
+                                <td valign="top" class="value ${hasErrors(bean: project_EmployeeInstance, field: 'employee', 'errors')}">
+                                    <g:select name="employee.id" from="${com.orangeandbronze.ozmness.Employee.list()}" optionKey="id" value="${project_EmployeeInstance?.employee?.id}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="name"><g:message code="technology.name.label" default="Name" /></label>
+                                  <label for="project"><g:message code="project_Employee.project.label" default="Project" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: technologyInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${technologyInstance?.name}" />
+                                <td valign="top" class="value ${hasErrors(bean: project_EmployeeInstance, field: 'project', 'errors')}">
+                                    <g:select name="project.id" from="${com.orangeandbronze.ozmness.Project.list()}" optionKey="id" value="${project_EmployeeInstance?.project?.id}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="role"><g:message code="project_Employee.role.label" default="Role" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: project_EmployeeInstance, field: 'role', 'errors')}">
+                                    <g:select name="role" from="${com.orangeandbronze.ozmness.ProjectRole?.values()}" keys="${com.orangeandbronze.ozmness.ProjectRole?.values()*.name()}" value="${project_EmployeeInstance?.role?.name()}"  />
                                 </td>
                             </tr>
                         

@@ -1,10 +1,7 @@
 package com.orangeandbronze.ozmness
 
-import grails.plugins.springsecurity.Secured;
-
 class EmployeeController {
 
-	def springSecurityService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
@@ -16,17 +13,14 @@ class EmployeeController {
         [employeeInstanceList: Employee.list(params), employeeInstanceTotal: Employee.count()]
     }
 
-	@Secured(['ROLE_ADMIN'])
     def create = {
         def employeeInstance = new Employee()
         employeeInstance.properties = params
         return [employeeInstance: employeeInstance]
     }
-	
-	@Secured(['ROLE_ADMIN'])
+
     def save = {
         def employeeInstance = new Employee(params)
-		employeeInstance.password = springSecurityService.encodePassword(params.password)
         if (employeeInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'employee.label', default: 'Employee'), employeeInstance.id])}"
             redirect(action: "show", id: employeeInstance.id)
@@ -60,7 +54,6 @@ class EmployeeController {
 
     def update = {
         def employeeInstance = Employee.get(params.id)
-			
         if (employeeInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -72,7 +65,6 @@ class EmployeeController {
                 }
             }
             employeeInstance.properties = params
-			employeeInstance.password = springSecurityService.encodePassword(params.password)
             if (!employeeInstance.hasErrors() && employeeInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'employee.label', default: 'Employee'), employeeInstance.id])}"
                 redirect(action: "show", id: employeeInstance.id)
@@ -86,8 +78,7 @@ class EmployeeController {
             redirect(action: "list")
         }
     }
-	
-	@Secured(['ROLE_ADMIN'])
+
     def delete = {
         def employeeInstance = Employee.get(params.id)
         if (employeeInstance) {

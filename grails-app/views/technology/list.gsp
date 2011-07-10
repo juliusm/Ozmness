@@ -24,9 +24,9 @@
                         
                             <g:sortableColumn property="id" title="${message(code: 'technology.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="name" title="${message(code: 'technology.name.label', default: 'Name')}" />
-                        
                             <th><g:message code="technology.parent.label" default="Parent" /></th>
+                        
+                            <g:sortableColumn property="name" title="${message(code: 'technology.name.label', default: 'Name')}" />
                         
                         </tr>
                     </thead>
@@ -36,9 +36,9 @@
                         
                             <td><g:link action="show" id="${technologyInstance.id}">${fieldValue(bean: technologyInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: technologyInstance, field: "name")}</td>
-                        
                             <td>${fieldValue(bean: technologyInstance, field: "parent")}</td>
+                        
+                            <td>${fieldValue(bean: technologyInstance, field: "name")}</td>
                         
                         </tr>
                     </g:each>

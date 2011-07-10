@@ -96,7 +96,7 @@
                                     <label for="position"><g:message code="employee.position.label" default="Position" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'position', 'errors')}">
-                                    <g:select name="position.id" from="${com.orangeandbronze.ozmness.Position.list()}" optionKey="id" value="${employeeInstance?.position?.name}"  />
+                                    <g:select name="position.id" from="${com.orangeandbronze.ozmness.Position.list()}" optionKey="id" value="${employeeInstance?.position?.id}"  />
                                 </td>
                             </tr>
                         

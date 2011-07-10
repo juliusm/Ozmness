@@ -4,7 +4,7 @@ class Employee extends User{
 
 	Employee mentor
 	Position position
-	static hasMany = [projects: Project]
+	static hasMany = [projects: Project_Employee, proteges: Employee]
 	
     static constraints = {
     }

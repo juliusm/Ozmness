@@ -1,10 +1,10 @@
 
-<%@ page import="com.orangeandbronze.ozmness.Project" %>
+<%@ page import="com.orangeandbronze.ozmness.Project_Employee" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
+        <g:set var="entityName" value="${message(code: 'project_Employee.label', default: 'Project_Employee')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -23,42 +23,30 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.id.label" default="Id" /></td>
+                            <td valign="top" class="name"><g:message code="project_Employee.id.label" default="Id" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.employees.label" default="Employees" /></td>
-                            
-                            <td valign="top" style="text-align: left;" class="value">
-                                <ul>
-                                <g:each in="${projectInstance.employees}" var="e">
-                                    <li><g:link controller="project_Employee" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
-                            </td>
+                            <td valign="top" class="value">${fieldValue(bean: project_EmployeeInstance, field: "id")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.name.label" default="Name" /></td>
+                            <td valign="top" class="name"><g:message code="project_Employee.employee.label" default="Employee" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: projectInstance, field: "name")}</td>
+                            <td valign="top" class="value"><g:link controller="employee" action="show" id="${project_EmployeeInstance?.employee?.id}">${project_EmployeeInstance?.employee?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.technologies.label" default="Technologies" /></td>
+                            <td valign="top" class="name"><g:message code="project_Employee.project.label" default="Project" /></td>
                             
-                            <td valign="top" style="text-align: left;" class="value">
-                                <ul>
-                                <g:each in="${projectInstance.technologies}" var="t">
-                                    <li><g:link controller="technology" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
-                            </td>
+                            <td valign="top" class="value"><g:link controller="project" action="show" id="${project_EmployeeInstance?.project?.id}">${project_EmployeeInstance?.project?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="project_Employee.role.label" default="Role" /></td>
+                            
+                            <td valign="top" class="value">${project_EmployeeInstance?.role?.encodeAsHTML()}</td>
                             
                         </tr>
                     
@@ -67,7 +55,7 @@
             </div>
             <div class="buttons">
                 <g:form>
-                    <g:hiddenField name="id" value="${projectInstance?.id}" />
+                    <g:hiddenField name="id" value="${project_EmployeeInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
