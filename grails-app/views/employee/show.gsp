@@ -65,6 +65,19 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="employee.leadProjects.label" default="Projects Lead" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${employeeInstance.leadProjects}" var="l">
+                                    <li><g:link controller="project" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="employee.mentor.label" default="Mentor" /></td>
                             
                             <td valign="top" class="value"><g:link controller="employee" action="show" id="${employeeInstance?.mentor?.id}">${employeeInstance?.mentor?.encodeAsHTML()}</g:link></td>
@@ -91,7 +104,7 @@
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
                                 <g:each in="${employeeInstance.projects}" var="p">
-                                    <li><g:link controller="project_Employee" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+                                    <li><g:link controller="project" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>

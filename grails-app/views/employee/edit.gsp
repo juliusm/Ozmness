@@ -78,6 +78,22 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                  <label for="leadProjects"><g:message code="employee.leadProjects.label" default="Lead Projects" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'leadProjects', 'errors')}">
+                                    
+<ul>
+<g:each in="${employeeInstance?.leadProjects?}" var="l">
+    <li><g:link controller="project" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
+</g:each>
+</ul>
+<g:link controller="project" action="create" params="['employee.id': employeeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'project.label', default: 'Project')])}</g:link>
+
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                   <label for="mentor"><g:message code="employee.mentor.label" default="Mentor" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'mentor', 'errors')}">
@@ -109,13 +125,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'projects', 'errors')}">
                                     
-<ul>
-<g:each in="${employeeInstance?.projects?}" var="p">
-    <li><g:link controller="project_Employee" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-</ul>
-<g:link controller="project_Employee" action="create" params="['employee.id': employeeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'project_Employee.label', default: 'Project_Employee')])}</g:link>
-
                                 </td>
                             </tr>
                         

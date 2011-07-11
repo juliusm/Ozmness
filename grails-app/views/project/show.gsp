@@ -30,12 +30,19 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="project.employees.label" default="Employees" /></td>
+                            <td valign="top" class="name"><g:message code="project.lead.label" default="Lead" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="employee" action="show" id="${projectInstance?.lead?.id}">${projectInstance?.lead?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="project.members.label" default="Members" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${projectInstance.employees}" var="e">
-                                    <li><g:link controller="project_Employee" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></li>
+                                <g:each in="${projectInstance.members}" var="m">
+                                    <li><g:link controller="employee" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>

@@ -24,9 +24,9 @@
                         
                             <g:sortableColumn property="id" title="${message(code: 'rating.id.label', default: 'Id')}" />
                         
-                            <th><g:message code="rating.ratee.label" default="Ratee" /></th>
+                            <th><g:message code="rating.ratee.label" default="Creator" /></th>
                         
-                            <th><g:message code="rating.rater.label" default="Rater" /></th>
+                            <th><g:message code="rating.rater.label" default="Employee Rated" /></th>
                         
                             <th><g:message code="rating.technology.label" default="Technology" /></th>
                         

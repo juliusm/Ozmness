@@ -30,7 +30,7 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="ratee"><g:message code="rating.ratee.label" default="Ratee" /></label>
+                                    <label for="ratee"><g:message code="rating.ratee.label" default="Employee Rated" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: ratingInstance, field: 'ratee', 'errors')}">
                                     <g:select name="ratee.id" from="${com.orangeandbronze.ozmness.Employee.list()}" optionKey="id" value="${ratingInstance?.ratee?.id}"  />
@@ -39,7 +39,7 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="rater"><g:message code="rating.rater.label" default="Rater" /></label>
+                                    <label for="rater"><g:message code="rating.rater.label" default="Creator" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: ratingInstance, field: 'rater', 'errors')}">
                                     <g:select name="rater.id" from="${com.orangeandbronze.ozmness.Employee.list()}" optionKey="id" value="${ratingInstance?.rater?.id}"  />
