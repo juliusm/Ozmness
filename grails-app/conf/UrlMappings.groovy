@@ -1,3 +1,4 @@
+import com.orangeandbronze.ozmness.*;
 class UrlMappings {
 	
 	static mappings = {
@@ -7,7 +8,7 @@ class UrlMappings {
 			}
 		}
 
-		"/"(controller:"Home", action:"index")
+		"/"(controller:"home", action:"index")
 		
 		"500"(view:'/error')
 		"404"(view:'/error')

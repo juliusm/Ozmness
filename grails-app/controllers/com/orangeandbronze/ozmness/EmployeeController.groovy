@@ -1,6 +1,6 @@
 package com.orangeandbronze.ozmness
 
-import grails.plugins.springsecurity.Secured;
+import grails.plugins.springsecurity.Secured
 
 class EmployeeController {
 
@@ -17,18 +17,22 @@ class EmployeeController {
         [employeeInstanceList: Employee.list(params), employeeInstanceTotal: Employee.count()]
     }
 
-	@Secured("ADMIN")
+	@Secured(['ROLE_ADMIN'])
     def create = {
         def employeeInstance = new Employee()
         employeeInstance.properties = params
         return [employeeInstance: employeeInstance]
     }
 
-	@Secured("ADMIN")
+	@Secured(['ROLE_ADMIN'])
     def save = {
         def employeeInstance = new Employee(params)
 		employeeInstance.password = springSecurityService.encodePassword(params.password)
-        if (employeeInstance.save(flush: true)) {
+        employeeInstance.enabled = true
+		if (employeeInstance.save(flush: true)) {
+			def role = Role.get(2)
+			def userRoleInstance = new UserRole(role: role, user: employeeInstance)
+			userRoleInstance.save(flush: true)
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'employee.label', default: 'Employee'), employeeInstance.id])}"
             redirect(action: "show", id: employeeInstance.id)
         }
@@ -87,7 +91,7 @@ class EmployeeController {
         }
     }
 
-	@Secured("ADMIN")
+	@Secured(['ADMIN'])
     def delete = {
         def employeeInstance = Employee.get(params.id)
         if (employeeInstance) {

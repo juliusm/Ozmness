@@ -97,11 +97,11 @@ grails.plugins.springsecurity.authority.className = 'com.orangeandbronze.ozmness
 grails.plugins.springsecurity.rejectIfNoRule = false
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
-	'/**': 		['IS_AUTHENTICATED_FULLY'],
-	'/image/**':	['IS_AUTHENTICATED_FULLY'],
-	'/js/**':	['IS_AUTHENTICATED_FULLY'],
-	'/css/**':	['IS_AUTHENTICATED_FULLY'],
-	'/images/**':	['IS_AUTHENTICATED_FULLY'],
+	'/**': 		['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/image/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/js/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/css/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/images/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/login/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/logout/':	['IS_AUTHENTICATED_ANONYMOUSLY']
 

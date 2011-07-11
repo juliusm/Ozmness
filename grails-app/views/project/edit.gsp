@@ -1,5 +1,3 @@
-
-
 <%@ page import="com.orangeandbronze.ozmness.Project" %>
 <html>
     <head>
