@@ -11,6 +11,7 @@
 // }
 import grails.plugins.springsecurity.SecurityConfigType
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
+//grails.config.locations = ["classpath:localConfig.groovy"]
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],

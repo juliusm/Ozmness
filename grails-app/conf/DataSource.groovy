@@ -1,4 +1,5 @@
 dataSource {
+	dialect = org.hibernate.dialect.MySQLInnoDBDialect.class
 	pooled = true
 	driverClassName = "org.hsqldb.jdbcDriver"
 	username = "sa"

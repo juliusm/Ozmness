@@ -4,8 +4,9 @@ class Rating {
 
 	int value
 	Technology technology
-	Employee rater
-	Employee ratee
+	Employee rated
+	Employee creator
+	String comment
 	
     static constraints = {
     }

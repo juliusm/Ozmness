@@ -21,51 +21,33 @@
             <div class="dialog">
                 <table>
                     <tbody>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="rating.id.label" default="Id" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: ratingInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="rating.ratee.label" default="Ratee" /></td>
-                            
-                            <td valign="top" class="value"><g:link controller="employee" action="show" id="${ratingInstance?.ratee?.id}">${ratingInstance?.ratee?.encodeAsHTML()}</g:link></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="rating.rater.label" default="Rater" /></td>
-                            
-                            <td valign="top" class="value"><g:link controller="employee" action="show" id="${ratingInstance?.rater?.id}">${ratingInstance?.rater?.encodeAsHTML()}</g:link></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="rating.technology.label" default="Technology" /></td>
-                            
-                            <td valign="top" class="value"><g:link controller="technology" action="show" id="${ratingInstance?.technology?.id}">${ratingInstance?.technology?.encodeAsHTML()}</g:link></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="rating.value.label" default="Value" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: ratingInstance, field: "value")}</td>
-                            
-                        </tr>
-                    
+                      <tr>
+                        <th>Technology</th>
+                        <th colspan="${creatorList.size}">Ratings</th>
+                      </tr>
+                      <tr>
+                        <th>&nbsp;</th>
+                        <g:each in="${creatorList}" status="j" var="creator">
+                          <th>${creator.username}</td>                         
+                        </g:each>
+                      </tr>
+                    <g:each in="${com.orangeandbronze.ozmness.Technology.list()}" status="i" var="technology">
+                      <tr>
+                        <td>${technology.name}</td>
+                        <g:each in="${creatorList}" status="j" var="creator">
+                          <g:each in="${ratingsList}" status="k" var="ratings">
+                            <g:if test="${ratings.technology.id == technology.id && creator.id == ratings.creator.id}">
+                            <td style="text-align: center">${ratings.value}</td>
+                            </g:if>
+                          </g:each>
+                        </g:each>
+                      </tr>
+                    </g:each>
                     </tbody>
                 </table>
             </div>
             <div class="buttons">
-                <g:form>
-                    <g:hiddenField name="id" value="${ratingInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                </g:form>
+               &nbsp;
             </div>
         </div>
     </body>

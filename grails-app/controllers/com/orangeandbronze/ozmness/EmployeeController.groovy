@@ -91,7 +91,7 @@ class EmployeeController {
         }
     }
 
-	@Secured(['ADMIN'])
+	@Secured(['ROLE_ADMIN'])
     def delete = {
         def employeeInstance = Employee.get(params.id)
         if (employeeInstance) {

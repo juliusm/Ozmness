@@ -40,9 +40,9 @@
                         
                             <td><g:link action="show" id="${ratingInstance.id}">${fieldValue(bean: ratingInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: ratingInstance, field: "ratee")}</td>
+                            <td>${fieldValue(bean: ratingInstance, field: "rated")}</td>
                         
-                            <td>${fieldValue(bean: ratingInstance, field: "rater")}</td>
+                            <td>${fieldValue(bean: ratingInstance, field: "creator")}</td>
                         
                             <td>${fieldValue(bean: ratingInstance, field: "technology")}</td>
                         
