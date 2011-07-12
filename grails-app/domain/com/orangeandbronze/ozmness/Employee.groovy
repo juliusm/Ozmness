@@ -10,6 +10,9 @@ class Employee extends User{
 	static belongsTo = Project
 	
     static constraints = {
+        position(nullable: false)
+        username(unique: true, nullable:false, blank:false)
+        password(nullable:false)
     }
 	
 	String toString(){

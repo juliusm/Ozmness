@@ -1,5 +1,5 @@
 dataSource {
-	dialect = org.hibernate.dialect.MySQLInnoDBDialect.class
+	
 	pooled = true
 	driverClassName = "org.hsqldb.jdbcDriver"
 	username = "sa"
@@ -14,6 +14,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
+                        dialect = org.hibernate.dialect.MySQLInnoDBDialect.class
 			dbCreate = 'update' // one of 'create', 'create-drop','update'
 			driverClassName='com.mysql.jdbc.Driver'
 			url = 'jdbc:mysql://localhost/ozmness'

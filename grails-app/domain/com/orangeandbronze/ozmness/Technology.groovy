@@ -7,6 +7,7 @@ class Technology {
 	
     static constraints = {
     	parent(nullable:true)
+        name(nullable: false, blank:false, unique:true)
 		}
 	
 	String toString(){

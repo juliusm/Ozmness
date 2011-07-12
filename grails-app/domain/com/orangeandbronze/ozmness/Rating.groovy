@@ -9,5 +9,8 @@ class Rating {
 	String comment
 	
     static constraints = {
+        technology(nullable:false)
+        rated(nullable:false)
+        creator(nullable:false)
     }
 }
