@@ -41,17 +41,23 @@ class EmployeeController {
         }
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def show = {
         def employeeInstance = Employee.get(params.id)
+        def currentUser = springSecurityService.currentUser
+        def admin = Role.findByAuthority('ROLE_ADMIN')
+        def canEdit = (currentUser.getAuthorities().contains(admin)) || (currentUser.id == employeeInstance.id)
+        
         if (!employeeInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'employee.label', default: 'Employee'), params.id])}"
             redirect(action: "list")
         }
         else {
-            [employeeInstance: employeeInstance]
+            [employeeInstance: employeeInstance, canEdit: canEdit]
         }
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def edit = {
         def employeeInstance = Employee.get(params.id)
         if (!employeeInstance) {
@@ -63,8 +69,10 @@ class EmployeeController {
         }
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def update = {
         def employeeInstance = Employee.get(params.id)
+        def password = employeeInstance.password
         if (employeeInstance) {
             if (params.version) {
                 def version = params.version.toLong()
@@ -76,7 +84,11 @@ class EmployeeController {
                 }
             }
             employeeInstance.properties = params
+            if(params.password){
 			employeeInstance.password = springSecurityService.encodePassword(params.password)
+            }else{
+                employeeInstance.password = password
+            }
             if (!employeeInstance.hasErrors() && employeeInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'employee.label', default: 'Employee'), employeeInstance.id])}"
                 redirect(action: "show", id: employeeInstance.id)

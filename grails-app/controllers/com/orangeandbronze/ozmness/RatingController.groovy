@@ -8,13 +8,29 @@ class RatingController {
     
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def index = {
-        redirect(action: "list", params: params)
+        def currentUser = springSecurityService.currentUser
+        def admin = Role.findByAuthority('ROLE_ADMIN')
+        def canView = currentUser.getAuthorities().contains(admin)
+        if(canView){
+            redirect(action: "list", params: params)
+        }else{
+            redirect(action: "show", id: currentUser.id)
+        }
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def list = {
+        def currentUser = springSecurityService.currentUser
+        def dev = Role.findByAuthority('ROLE_ADMIN')
+        def canView = currentUser.getAuthorities().contains(dev)
+        if(canView){
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [ratingInstanceList: Rating.list(params), ratingInstanceTotal: Rating.count()]
+        }else{
+            redirect(action: "show", id: currentUser.id)
+        }
     }
 
     @Secured(['ROLE_DEV'])
@@ -42,6 +58,7 @@ class RatingController {
         return [ratingsList: ratings, employeesRatedList: employeesRated]
     }
 
+    @Secured(['ROLE_DEV'])
     def save = {
 
         int rows = Integer.parseInt(params.rows)-1
@@ -68,24 +85,31 @@ class RatingController {
             redirect(action: "list")
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def show = {
-        Employee rated = Employee.get(2)
-        def ratings = Rating.findByRated(Employee.get(params.id))
+        def rated = Employee.get(params.id)
+        def ratings = Rating.findAllByRated(rated)
+        
+        def currentUser = springSecurityService.currentUser
+        def dev = Role.findByAuthority('ROLE_DEV')
+        def canRate = currentUser.getAuthorities().contains(dev)
+        println currentUser.getAuthorities()
         def creator = []
        
-        if (!ratings) {
+        if (!ratings && !canRate) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
             redirect(action: "list")
         }
         else {
-             for(employee in ratings.list()){
+             for(employee in ratings.toList()){
                 creator.add(employee.creator)
             }
             creator.unique()
-            [ratingsList: ratings.list(), creatorList: creator]
+            [ratingsList: ratings.toList(), creatorList: creator, rated: rated, canRate: canRate]
         }
     }
 
+    @Secured(['ROLE_DEV'])
     def edit = {
         def ratingInstance = Rating.get(params.id)
         if (!ratingInstance) {
@@ -97,49 +121,50 @@ class RatingController {
         }
     }
 
-    def update = {
-        def ratingInstance = Rating.get(params.id)
-        if (ratingInstance) {
-            if (params.version) {
-                def version = params.version.toLong()
-                if (ratingInstance.version > version) {
-                    
-                    ratingInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'rating.label', default: 'Rating')] as Object[], "Another user has updated this Rating while you were editing")
-                    render(view: "edit", model: [ratingInstance: ratingInstance])
-                    return
-                }
-            }
-            ratingInstance.properties = params
-            if (!ratingInstance.hasErrors() && ratingInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'rating.label', default: 'Rating'), ratingInstance.id])}"
-                redirect(action: "show", id: ratingInstance.id)
-            }
-            else {
-                render(view: "edit", model: [ratingInstance: ratingInstance])
-            }
-        }
-        else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-            redirect(action: "list")
-        }
-    }
-
-    def delete = {
-        def ratingInstance = Rating.get(params.id)
-        if (ratingInstance) {
-            try {
-                ratingInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-                redirect(action: "list")
-            }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-                redirect(action: "show", id: params.id)
-            }
-        }
-        else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-            redirect(action: "list")
-        }
-    }
+    
+//    def update = {
+//        def ratingInstance = Rating.get(params.id)
+//        if (ratingInstance) {
+//            if (params.version) {
+//                def version = params.version.toLong()
+//                if (ratingInstance.version > version) {
+//                    
+//                    ratingInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'rating.label', default: 'Rating')] as Object[], "Another user has updated this Rating while you were editing")
+//                    render(view: "edit", model: [ratingInstance: ratingInstance])
+//                    return
+//                }
+//            }
+//            ratingInstance.properties = params
+//            if (!ratingInstance.hasErrors() && ratingInstance.save(flush: true)) {
+//                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'rating.label', default: 'Rating'), ratingInstance.id])}"
+//                redirect(action: "show", id: ratingInstance.id)
+//            }
+//            else {
+//                render(view: "edit", model: [ratingInstance: ratingInstance])
+//            }
+//        }
+//        else {
+//            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
+//            redirect(action: "list")
+//        }
+//    }
+//
+//    def delete = {
+//        def ratingInstance = Rating.get(params.id)
+//        if (ratingInstance) {
+//            try {
+//                ratingInstance.delete(flush: true)
+//                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
+//                redirect(action: "list")
+//            }
+//            catch (org.springframework.dao.DataIntegrityViolationException e) {
+//                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
+//                redirect(action: "show", id: params.id)
+//            }
+//        }
+//        else {
+//            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
+//            redirect(action: "list")
+//        }
+//    }
 }

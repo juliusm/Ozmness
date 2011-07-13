@@ -11,7 +11,10 @@ class TechnologyControllerTests extends ControllerUnitTestCase {
         super.tearDown()
     }
 
-    void testSomething() {
-
+    void testList() {
+        mockDomain(Technology, [new Technology(name:"spring"),
+                                new Technology(name:"hibernate")])
+        def model = controller.list()
+        assertEquals 2, model.technologyInstanceList.size()
     }
 }

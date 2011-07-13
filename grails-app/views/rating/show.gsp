@@ -4,17 +4,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'rating.label', default: 'Rating')}" />
+       
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:link class="list" action="list">Rating List</g:link></span>
+            <g:if test="${canRate}">
+            <span class="menuButton"><g:link class="create" action="create">New Rating</g:link></span>
+            </g:if>
         </div>
         <div class="body">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <h1>Showing ${rated}'s Ratings</h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -28,19 +30,29 @@
                       <tr>
                         <th>&nbsp;</th>
                         <g:each in="${creatorList}" status="j" var="creator">
-                          <th>${creator.username}</td>                         
+                          <th>${creator.name}</td>                         
                         </g:each>
                       </tr>
                     <g:each in="${com.orangeandbronze.ozmness.Technology.list()}" status="i" var="technology">
+                      
                       <tr>
                         <td>${technology.name}</td>
                         <g:each in="${creatorList}" status="j" var="creator">
+                          <g:set var="hasCreatorRatings" value="false" />
                           <g:each in="${ratingsList}" status="k" var="ratings">
-                            <g:if test="${ratings.technology.id == technology.id && creator.id == ratings.creator.id}">
-                            <td style="text-align: center">${ratings.value}</td>
+                            <g:if test="${ratings.technology.id == technology.id && creator.id == ratings?.creator.id}">
+                            <td style="text-align: center" TITLE="${ratings.comment}">${ratings.value}</td>
+                            <g:set var="hasCreatorRatings" value="true" />
                             </g:if>
+                            
                           </g:each>
+                          
+                          <g:if test="${hasCreatorRatings.equals('false')}">
+                            <td>&nbsp;</td>
+                          </g:if>
                         </g:each>
+                      
+                      
                       </tr>
                     </g:each>
                     </tbody>

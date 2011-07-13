@@ -33,7 +33,7 @@
                                     <label for="lead"><g:message code="project.lead.label" default="Lead" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'lead', 'errors')}">
-                                    <g:select name="lead.id" from="${com.orangeandbronze.ozmness.Employee.list()}" optionKey="id" value="${projectInstance?.lead?.id}"  />
+                                    <g:select name="lead.id" from="${leaderList}" optionKey="id" value="${projectInstance?.lead?.id}"  />
                                 </td>
                             </tr>
                         

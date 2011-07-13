@@ -40,7 +40,16 @@
 			<div class="dialog">
 				<table>
 					<tbody>
-
+                                                <tr class="prop">
+							<td valign="top" class="name"><label for="name"><g:message
+										code="employee.name.label" default="Name" />
+							</label></td>
+							<td valign="top"
+								class="value ${hasErrors(bean: employeeInstance, field: 'name', 'errors')}">
+								<g:textField name="name"
+									value="${employeeInstance?.name}" /></td>
+						</tr>
+                                                
 						<tr class="prop">
 							<td valign="top" class="name"><label for="username"><g:message
 										code="employee.username.label" default="Username" />

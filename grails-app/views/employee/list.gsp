@@ -24,7 +24,7 @@
                         
                             <g:sortableColumn property="id" title="${message(code: 'employee.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="username" title="${message(code: 'employee.username.label', default: 'Username')}" />
+                            <g:sortableColumn property="name" title="${message(code: 'employee.name.label', default: 'Name')}" />
                         
                             <g:sortableColumn property="enabled" title="${message(code: 'employee.enabled.label', default: 'Enabled')}" />
                         
@@ -36,7 +36,7 @@
                         
                             <td><g:link action="show" id="${employeeInstance.id}">${fieldValue(bean: employeeInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: employeeInstance, field: "username")}</td>
+                            <td>${fieldValue(bean: employeeInstance, field: "name")}</td>
                         
                             <td><g:formatBoolean boolean="${employeeInstance.enabled}" /></td>
                         

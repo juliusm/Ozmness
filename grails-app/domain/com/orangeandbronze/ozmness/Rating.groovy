@@ -10,7 +10,10 @@ class Rating {
 	
     static constraints = {
         technology(nullable:false)
-        rated(nullable:false)
-        creator(nullable:false)
+       
+    }
+    
+    String toString(){
+        'Rated: '+rated+' creator: '+creator+' value: '+value
     }
 }

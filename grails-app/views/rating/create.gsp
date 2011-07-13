@@ -7,7 +7,12 @@
 <g:set var="entityName" value="Rate Employee" />
 </head>
 <body>
-	<h1>
+	
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="list" action="list">Ratings List</g:link></span>
+        </div>
+        <h1>
 		${entityName}
 	</h1>
 	<div class="body">

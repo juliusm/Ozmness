@@ -2,6 +2,7 @@ package com.orangeandbronze.ozmness
 
 class Employee extends User{
 
+        String name
 	Employee mentor
 	Position position
 	static hasMany = [projects: Project, proteges: Employee, leadProjects: Project]
@@ -13,9 +14,10 @@ class Employee extends User{
         position(nullable: false)
         username(unique: true, nullable:false, blank:false)
         password(nullable:false)
+        name(nullable: false, blank:false)
     }
 	
 	String toString(){
-		username
+		name
 	}
 }

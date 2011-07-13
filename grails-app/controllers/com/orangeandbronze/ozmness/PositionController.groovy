@@ -16,12 +16,39 @@ class PositionController {
     def create = {
         def positionInstance = new Position()
         positionInstance.properties = params
-        return [positionInstance: positionInstance]
+        
+        def technologies = Technology.list()
+        def ratings = []
+        for(technology in technologies){
+                def ratingInstance = new Rating()
+                ratingInstance.properties = params
+                ratingInstance.technology = technology
+                ratings.add(ratingInstance)
+                }
+        
+        return [positionInstance: positionInstance, ratingsList: ratings]
     }
 
     def save = {
-        def positionInstance = new Position(params)
+        def positionInstance = new Position(params.name)
         if (positionInstance.save(flush: true)) {
+            for(i in 0..rows){
+              def ratingInstance = new Rating(params."ratings${i}")
+              def existingRating = Rating.find("from Rating where creator = ? and rated = ? and technology= ?",[creator, rated, ratingInstance.technology])
+
+              boolean save = false
+               if(existingRating){
+                   existingRating.properties = params."ratings${i}"
+                   save = existingRating.save(flush: true)
+               }else{
+                   ratingInstance.rated = rated
+                   ratingInstance.creator = creator
+                   save = ratingInstance.save(flush: true)
+               }
+                if (!save) {
+                     render(view: "create")
+                }
+        }
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'position.label', default: 'Position'), positionInstance.id])}"
             redirect(action: "show", id: positionInstance.id)
         }

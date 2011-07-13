@@ -2,8 +2,7 @@ package com.orangeandbronze.ozmness
 
 import grails.test.*
 
-class EmployeeControllerTests extends ControllerUnitTestCase {
-    
+class PositionIntegrationTestTests extends GroovyTestCase {
     protected void setUp() {
         super.setUp()
     }

@@ -28,6 +28,13 @@
                             <td valign="top" class="value">${fieldValue(bean: employeeInstance, field: "id")}</td>
                             
                         </tr>
+                        
+                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="employee.name.label" default="Name" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: employeeInstance, field: "name")}</td>
+                            
+                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="employee.username.label" default="Username" /></td>
@@ -102,8 +109,10 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${employeeInstance?.id}" />
+                    <g:if test="${canEdit}">
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    </g:if>&nbsp;
                 </g:form>
             </div>
         </div>
