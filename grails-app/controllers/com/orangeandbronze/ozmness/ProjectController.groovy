@@ -2,27 +2,26 @@ package com.orangeandbronze.ozmness
 
 import grails.plugins.springsecurity.Secured;
 
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class ProjectController {
 
     def springSecurityService
     
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    
     def index = {
         def currentUser = springSecurityService.currentUser
-        def dev = Role.findByAuthority('ROLE_ADMIN')
-        def canView = currentUser.getAuthorities().contains(dev)
+        def admin = Role.findByAuthority('ROLE_ADMIN')
+        def canView = currentUser.getAuthorities().contains(admin)
         redirect(action: "list", params: params)
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [projectInstanceList: Project.list(params), projectInstanceTotal: Project.count()]
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def create = {
         def currentUser = springSecurityService.currentUser
         def admin = Role.findByAuthority('ROLE_ADMIN')
@@ -38,7 +37,6 @@ class ProjectController {
         return [projectInstance: projectInstance, leaderList: leaderList]
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def save = {
         def projectInstance = new Project(params)
         if (projectInstance.save(flush: true)) {
@@ -50,7 +48,6 @@ class ProjectController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def show = {
         def projectInstance = Project.get(params.id)
         def currentUser = springSecurityService.currentUser
@@ -66,7 +63,6 @@ class ProjectController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def edit = {
         def projectInstance = Project.get(params.id)
         if (!projectInstance) {
@@ -78,7 +74,6 @@ class ProjectController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def update = {
         def projectInstance = Project.get(params.id)
         if (projectInstance) {
@@ -106,7 +101,6 @@ class ProjectController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def delete = {
         def projectInstance = Project.get(params.id)
         if (projectInstance) {

@@ -30,19 +30,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="position.minimumRatings.label" default="Minimum Ratings" /></td>
-                            
-                            <td valign="top" style="text-align: left;" class="value">
-                                <ul>
-                                <g:each in="${positionInstance.minimumRatings}" var="m">
-                                    <li><g:link controller="rating" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
-                            </td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="position.name.label" default="Name" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: positionInstance, field: "name")}</td>

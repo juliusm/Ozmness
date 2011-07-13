@@ -33,15 +33,6 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="minimumRatings"><g:message code="position.minimumRatings.label" default="Minimum Ratings" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'minimumRatings', 'errors')}">
-                                    <g:select name="minimumRatings" from="${com.orangeandbronze.ozmness.Rating.list()}" multiple="yes" optionKey="id" size="5" value="${positionInstance?.minimumRatings*.id}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                   <label for="name"><g:message code="position.name.label" default="Name" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'name', 'errors')}">

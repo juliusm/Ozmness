@@ -1,5 +1,8 @@
 package com.orangeandbronze.ozmness
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(['ROLE_ADMIN'])
 class PositionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -30,25 +33,9 @@ class PositionController {
     }
 
     def save = {
-        def positionInstance = new Position(params.name)
+        def positionInstance = new Position(name:params.name)
         if (positionInstance.save(flush: true)) {
-            for(i in 0..rows){
-              def ratingInstance = new Rating(params."ratings${i}")
-              def existingRating = Rating.find("from Rating where creator = ? and rated = ? and technology= ?",[creator, rated, ratingInstance.technology])
-
-              boolean save = false
-               if(existingRating){
-                   existingRating.properties = params."ratings${i}"
-                   save = existingRating.save(flush: true)
-               }else{
-                   ratingInstance.rated = rated
-                   ratingInstance.creator = creator
-                   save = ratingInstance.save(flush: true)
-               }
-                if (!save) {
-                     render(view: "create")
-                }
-        }
+            
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'position.label', default: 'Position'), positionInstance.id])}"
             redirect(action: "show", id: positionInstance.id)
         }

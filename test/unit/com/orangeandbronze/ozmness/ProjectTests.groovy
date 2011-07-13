@@ -70,11 +70,5 @@ class ProjectTests extends GrailsUnitTestCase {
         assertEquals 'blank', test.errors.name
     }
     
-    void testWithoutTechnology(){
-        def test = new Project(name: 'proyekto2', lead:leadEmployee)
-        test.technologies =[]
-        assertFalse 'validation should fail', test.validate()
-        assertEquals 'minSize', test.errors.technologies
-      
-    }
+   
 }

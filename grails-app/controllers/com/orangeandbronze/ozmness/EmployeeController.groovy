@@ -2,6 +2,7 @@ package com.orangeandbronze.ozmness
 
 import grails.plugins.springsecurity.Secured
 
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class EmployeeController {
 
 	def springSecurityService
@@ -41,7 +42,7 @@ class EmployeeController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    
     def show = {
         def employeeInstance = Employee.get(params.id)
         def currentUser = springSecurityService.currentUser
@@ -57,7 +58,6 @@ class EmployeeController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def edit = {
         def employeeInstance = Employee.get(params.id)
         if (!employeeInstance) {
@@ -69,7 +69,6 @@ class EmployeeController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def update = {
         def employeeInstance = Employee.get(params.id)
         def password = employeeInstance.password

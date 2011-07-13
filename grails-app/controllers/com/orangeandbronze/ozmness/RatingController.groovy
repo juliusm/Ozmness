@@ -2,13 +2,14 @@ package com.orangeandbronze.ozmness
 
 import grails.plugins.springsecurity.Secured;
 
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class RatingController {
     
     def springSecurityService
     
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    
     def index = {
         def currentUser = springSecurityService.currentUser
         def admin = Role.findByAuthority('ROLE_ADMIN')
@@ -20,7 +21,6 @@ class RatingController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def list = {
         def currentUser = springSecurityService.currentUser
         def dev = Role.findByAuthority('ROLE_ADMIN')
@@ -85,7 +85,6 @@ class RatingController {
             redirect(action: "list")
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
     def show = {
         def rated = Employee.get(params.id)
         def ratings = Rating.findAllByRated(rated)
@@ -121,50 +120,5 @@ class RatingController {
         }
     }
 
-    
-//    def update = {
-//        def ratingInstance = Rating.get(params.id)
-//        if (ratingInstance) {
-//            if (params.version) {
-//                def version = params.version.toLong()
-//                if (ratingInstance.version > version) {
-//                    
-//                    ratingInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'rating.label', default: 'Rating')] as Object[], "Another user has updated this Rating while you were editing")
-//                    render(view: "edit", model: [ratingInstance: ratingInstance])
-//                    return
-//                }
-//            }
-//            ratingInstance.properties = params
-//            if (!ratingInstance.hasErrors() && ratingInstance.save(flush: true)) {
-//                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'rating.label', default: 'Rating'), ratingInstance.id])}"
-//                redirect(action: "show", id: ratingInstance.id)
-//            }
-//            else {
-//                render(view: "edit", model: [ratingInstance: ratingInstance])
-//            }
-//        }
-//        else {
-//            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-//            redirect(action: "list")
-//        }
-//    }
-//
-//    def delete = {
-//        def ratingInstance = Rating.get(params.id)
-//        if (ratingInstance) {
-//            try {
-//                ratingInstance.delete(flush: true)
-//                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-//                redirect(action: "list")
-//            }
-//            catch (org.springframework.dao.DataIntegrityViolationException e) {
-//                flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-//                redirect(action: "show", id: params.id)
-//            }
-//        }
-//        else {
-//            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'rating.label', default: 'Rating'), params.id])}"
-//            redirect(action: "list")
-//        }
-//    }
+
 }

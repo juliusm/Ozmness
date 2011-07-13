@@ -10,7 +10,7 @@ class Project {
     static constraints = {
         lead(nullable:false)
         name(nullable:false, blank:false, unique:true)
-        technologies(minSize:1)
+        
     }
 	
 	String toString(){
