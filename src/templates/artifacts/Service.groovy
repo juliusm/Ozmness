@@ -1,6 +1,4 @@
-package com.orangeandbronze.ozmness
-
-class TechnologyService {
+@artifact.package@class @artifact.name@ {
 
     static transactional = true
 

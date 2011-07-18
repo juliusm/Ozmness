@@ -66,10 +66,21 @@
 							</label></td>
 							<td valign="top"
 								class="value ${hasErrors(bean: employeeInstance, field: 'password', 'errors')}">
-								<g:textField name="password"
+								<g:passwordField name="password"
 									value="${employeeInstance?.password}" /></td>
 						</tr>
+                                                
+                                                <tr class="prop">
+							<td valign="top" class="name"><label for="password2"><g:message
+										code="employee.password2.label" default="Confirm Password" />
+							</label></td>
+							<td valign="top"
+								class="value ${hasErrors(bean: employeeInstance, field: 'password2', 'errors')}">
+								<g:passwordField name="password2"
+									value="${employeeInstance?.password2}" /></td>
+						</tr>
 
+                                                
 						<tr class="prop">
 							<td valign="top" class="name"><label for="mentor"><g:message
 										code="employee.mentor.label" default="Mentor" />

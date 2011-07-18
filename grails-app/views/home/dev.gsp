@@ -18,11 +18,11 @@
 		<span class="menuButton"><g:link controller="rating">Ratings</g:link></span>
 	</div>
 	<div id="pageBody">
-		<h1>Welcome!</h1>
-                 <p>Congratulations, you have successfully started your first Grails application! At the moment
-            this is the default page, feel free to modify it to either redirect to a controller or display whatever
-            content you may choose. Above is a list of controllers that are currently deployed in this application,
-            click on each to execute its default action:</p>
+         
+            <h1>Welcome!</h1>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
 	</div>
         
            

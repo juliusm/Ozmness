@@ -71,9 +71,18 @@
 							</label></td>
 							<td valign="top"
 								class="value ${hasErrors(bean: employeeInstance, field: 'password', 'errors')}">
-								<g:textField name="password" /></td>
+								<g:passwordField name="password" /></td>
 						</tr>
 
+                                                <tr class="prop">
+							<td valign="top" class="name"><label for="password2"><g:message
+										code="employee.password2.label" default="Confirm Password" />
+							</label></td>
+							<td valign="top"
+								class="value ${hasErrors(bean: employeeInstance, field: 'password2', 'errors')}">
+								<g:passwordField name="password2" /></td>
+						</tr>
+                                                
 						<tr class="prop">
 							<td valign="top" class="name"><label for="enabled"><g:message
 										code="employee.enabled.label" default="Enabled" />
@@ -105,27 +114,6 @@
 								<g:select name="position.id"
 									from="${com.orangeandbronze.ozmness.Position.list()}"
 									optionKey="id" value="${employeeInstance?.position?.id}" /></td>
-						</tr>
-
-						<tr class="prop">
-							<td valign="top" class="name"><label for="proteges"><g:message
-										code="employee.proteges.label" default="Proteges" />
-							</label></td>
-							<td valign="top"
-								class="value ${hasErrors(bean: employeeInstance, field: 'proteges', 'errors')}">
-
-								<ul>
-									<g:each in="${employeeInstance?.proteges?}" var="p">
-										<li><g:link controller="employee" action="show"
-												id="${p.id}">
-												${p?.encodeAsHTML()}
-											</g:link>
-										</li>
-									</g:each>
-								</ul> <g:link controller="employee" action="create"
-									params="['employee.id': employeeInstance?.id]">
-									${message(code: 'default.add.label', args: [message(code: 'employee.label', default: 'Employee')])}
-								</g:link></td>
 						</tr>
 
 					</tbody>

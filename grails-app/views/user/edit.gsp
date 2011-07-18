@@ -51,6 +51,15 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                  <label for="password2"><g:message code="user.password2.label" default="Password2" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password2', 'errors')}">
+                                    <g:textField name="password2" value="${userInstance?.password2}" />
+                                </td>
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                   <label for="accountExpired"><g:message code="user.accountExpired.label" default="Account Expired" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'accountExpired', 'errors')}">

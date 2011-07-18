@@ -72,15 +72,15 @@
                     </tbody>
                 </table>
             </div>
+            <g:if test="${canModify}">
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${projectInstance?.id}" />
-                    <g:if test="${canEdit}">
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                    </g:if>&nbsp;
                 </g:form>
             </div>
+              </g:if>
         </div>
     </body>
 </html>

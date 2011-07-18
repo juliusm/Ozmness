@@ -11,9 +11,9 @@
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list">Rating List</g:link></span>
-            <g:if test="${canRate}">
+            <sec:ifAllGranted roles="ROLE_DEV">
             <span class="menuButton"><g:link class="create" action="create">New Rating</g:link></span>
-            </g:if>
+            </sec:ifAllGranted>
         </div>
         <div class="body">
             <h1>Showing ${rated}'s Ratings</h1>
@@ -25,7 +25,7 @@
                     <tbody>
                       <tr>
                         <th>Technology</th>
-                        <th colspan="${creatorList.size}">Ratings</th>
+                        <th colspan="${creatorList.size()}">Ratings</th>
                       </tr>
                       <tr>
                         <th>&nbsp;</th>
@@ -37,6 +37,7 @@
                       
                       <tr>
                         <td>${technology.name}</td>
+                      
                         <g:each in="${creatorList}" status="j" var="creator">
                           <g:set var="hasCreatorRatings" value="false" />
                           <g:each in="${ratingsList}" status="k" var="ratings">
@@ -51,7 +52,6 @@
                             <td>&nbsp;</td>
                           </g:if>
                         </g:each>
-                      
                       
                       </tr>
                     </g:each>

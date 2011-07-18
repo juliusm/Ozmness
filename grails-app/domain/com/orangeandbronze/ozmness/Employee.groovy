@@ -10,13 +10,12 @@ class Employee extends User{
 	static mappedBy = [leadProjects: 'lead', projects: 'members']
 	static belongsTo = Project
 	
+   
     static constraints = {
         position(nullable: false)
-        username(unique: true, nullable:false, blank:false)
-        password(nullable:false)
         name(nullable: false, blank:false)
     }
-	
+        
 	String toString(){
 		name
 	}
